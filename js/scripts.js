@@ -224,9 +224,8 @@ $(document).ready(function () {
             jQuery.ajax({
                 crossDomain: true,
                 data: data,
-                url: 'http://script.google.com/macros/s/AKfycbxm9nPrt6U3I1xY1OCrftH3hecKPZzAwtEA6aUtxlY297ByMucW/exec',
+                url: 'https://script.google.com/macros/s/AKfycbxm9nPrt6U3I1xY1OCrftH3hecKPZzAwtEA6aUtxlY297ByMucW/exec',
                 method: "POST",
-                dataType: "jsonp"
             });
             console.log(data);
             if (data.result === "error") {
