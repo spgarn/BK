@@ -232,18 +232,16 @@ $(document).ready(function () {
                 console.log(res)
             }
             $.post('https://script.google.com/macros/s/AKfycbxm9nPrt6U3I1xY1OCrftH3hecKPZzAwtEA6aUtxlY297ByMucW/exec', data, {
-                headers: 'Content-Type' = 'text/plain'
-            }
-
-                .done(function (data) {
-                    console.log(data);
-                    if (data.result === "error") {
-                        $('#alert-wrapper').html(alert_markup('danger', data.message));
-                    } else {
-                        $('#alert-wrapper').html('');
-                        $('#rsvp-modal').modal('show');
-                    }
-                })
+                headers: 'Content-Type' = 'application/x-www-form-urlencoded'
+            }).done(function (data) {
+                console.log(data);
+                if (data.result === "error") {
+                    $('#alert-wrapper').html(alert_markup('danger', data.message));
+                } else {
+                    $('#alert-wrapper').html('');
+                    $('#rsvp-modal').modal('show');
+                }
+            })
                 .fail(function (data) {
                     console.log(data);
                     $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. '));
