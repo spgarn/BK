@@ -219,21 +219,25 @@ $(document).ready(function () {
             && MD5($('#invite_code').val()) !== '2ac7f43695eb0479d5846bb38eec59cc') {
             $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> Your invite code is incorrect.'));
         } else {
-            axios.defaults.headers.post['Content-Type'] = 'text/plain';
-            /*....*/
-            createInfo = () => {
-                let res = axios.post(api, JSON.stringify({
-                    id: 100,
-                    product: "product100",
-                    price: 1000,
-                    miniLot: 1000,
-                })
-                )
-                console.log(res)
+            // $.post('https://script.google.com/macros/s/AKfycbxm9nPrt6U3I1xY1OCrftH3hecKPZzAwtEA6aUtxlY297ByMucW/exec', data
+            $.ajax({
+                url: 'https://script.google.com/macros/s/AKfycbxm9nPrt6U3I1xY1OCrftH3hecKPZzAwtEA6aUtxlY297ByMucW/exec',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                type: "POST", /* or type:"GET" or type:"PUT" */
+                dataType: "json",
+                data: {
+                    data
+                },
+                success: function (result) {
+                    console.log(result);
+                },
+                error: function () {
+                    console.log("error");
+                }
             }
-            $.post('https://script.google.com/macros/s/AKfycbxm9nPrt6U3I1xY1OCrftH3hecKPZzAwtEA6aUtxlY297ByMucW/exec', data, {
-                headers: 'Content-Type' = 'application/x-www-form-urlencoded'
-            }).done(function (data) {
+            ).done(function (data) {
                 console.log(data);
                 if (data.result === "error") {
                     $('#alert-wrapper').html(alert_markup('danger', data.message));
