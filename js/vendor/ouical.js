@@ -1,18 +1,18 @@
-;(function(exports) {
+; (function (exports) {
     var MS_IN_MINUTES = 60 * 1000;
 
-    var formatTime = function(date) {
+    var formatTime = function (date) {
         return date.toISOString().replace(/-|:|\.\d+/g, '');
     };
 
-    var calculateEndTime = function(event) {
+    var calculateEndTime = function (event) {
         return event.end ?
             formatTime(event.end) :
             formatTime(new Date(event.start.getTime() + (event.duration * MS_IN_MINUTES)));
     };
 
     var calendarGenerators = {
-        google: function(event) {
+        google: function (event) {
             var startTime = formatTime(event.start);
             var endTime = calculateEndTime(event);
 
@@ -30,9 +30,9 @@
                 href + '">Google Calendar</a>';
         },
 
-        yahoo: function(event) {
+        yahoo: function (event) {
             var eventDuration = event.end ?
-                ((event.end.getTime() - event.start.getTime())/ MS_IN_MINUTES) :
+                ((event.end.getTime() - event.start.getTime()) / MS_IN_MINUTES) :
                 event.duration;
 
             // Yahoo dates are crazy, we need to convert the duration from minutes to hh:mm
@@ -63,7 +63,7 @@
                 href + '">Yahoo! Calendar</a>';
         },
 
-        ics: function(event, eClass, calendarName) {
+        ics: function (event, eClass, calendarName) {
             var startTime = formatTime(event.start);
             var endTime = calculateEndTime(event);
 
@@ -85,16 +85,16 @@
                 href + '">' + calendarName + ' Calendar</a>';
         },
 
-        ical: function(event) {
+        ical: function (event) {
             return this.ics(event, 'icon-ical', 'iCal');
         },
 
-        outlook: function(event) {
+        outlook: function (event) {
             return this.ics(event, 'icon-outlook', 'Outlook');
         }
     };
 
-    var generateCalendars = function(event) {
+    var generateCalendars = function (event) {
         return {
             google: calendarGenerators.google(event),
             yahoo: calendarGenerators.yahoo(event),
@@ -104,13 +104,13 @@
     };
 
     // Create CSS
-    var addCSS = function() {
+    var addCSS = function () {
         if (!document.getElementById('ouical-css')) {
             document.getElementsByTagName('head')[0].appendChild(generateCSS());
         }
     };
 
-    var generateCSS = function() {
+    var generateCSS = function () {
         var styles = document.createElement('style');
         styles.id = 'ouical-css';
 
@@ -120,19 +120,19 @@
     };
 
     // Make sure we have the necessary event data, such as start time and event duration
-    var validParams = function(params) {
+    var validParams = function (params) {
         return params.data !== undefined && params.data.start !== undefined &&
             (params.data.end !== undefined || params.data.duration !== undefined);
     };
 
-    var generateMarkup = function(calendars, clazz, calendarId) {
+    var generateMarkup = function (calendars, clazz, calendarId) {
         var result = document.createElement('div');
 
         result.innerHTML = '<label id="add-to-calendar-label" for="checkbox-for-' +
-            calendarId + '" class="btn btn-fill btn-small"><i class="fa fa-calendar"></i>&nbsp;&nbsp; Add to Calendar</label>';
+            calendarId + '" class="btn btn-fill btn-small"><i class="fa fa-calendar"></i>&nbsp;&nbsp; Lägg till i kalendern</label>';
         result.innerHTML += '<input name="add-to-calendar-checkbox" class="add-to-calendar-checkbox" id="checkbox-for-' + calendarId + '" type="checkbox">';
 
-        Object.keys(calendars).forEach(function(services) {
+        Object.keys(calendars).forEach(function (services) {
             result.innerHTML += calendars[services];
         });
 
@@ -147,19 +147,19 @@
         return result;
     };
 
-    var getClass = function(params) {
+    var getClass = function (params) {
         if (params.options && params.options.class) {
             return params.options.class;
         }
     };
 
-    var getOrGenerateCalendarId = function(params) {
+    var getOrGenerateCalendarId = function (params) {
         return params.options && params.options.id ?
             params.options.id :
             Math.floor(Math.random() * 1000000); // Generate a 6-digit random ID
     };
 
-    exports.createCalendar = function(params) {
+    exports.createCalendar = function (params) {
         if (!validParams(params)) {
             console.log('Event details missing.');
             return;

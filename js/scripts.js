@@ -184,23 +184,23 @@ $(document).ready(function () {
         },
         data: {
             // Event title
-            title: "Ram and Antara's Wedding",
+            title: "Björn & Kajsa bröllop",
 
             // Event start date
-            start: new Date('Nov 27, 2017 10:00'),
+            start: new Date('April 23, 2022 14:00'),
 
             // Event duration (IN MINUTES)
             // duration: 120,
 
             // You can also choose to set an end time
             // If an end time is set, this will take precedence over duration
-            end: new Date('Nov 29, 2017 00:00'),
+            end: new Date('April 23, 2022 03:00'),
 
             // Event Address
-            address: 'ITC Fortune Park Hotel, Kolkata',
+            address: 'Grand hotell, Mölle',
 
             // Event Description
-            description: "We can't wait to see you on our big day. For any queries or issues, please contact Mr. Amit Roy at +91 9876543210."
+            description: "Vi längtar till den stora dagen! Om ni undrar något ring: 0701 42 54 00"
         }
     });
 
@@ -211,17 +211,15 @@ $(document).ready(function () {
     $('#rsvp-form').on('submit', function (e) {
         e.preventDefault();
         var data = $(this).serialize();
-        console.log(data)
 
-        $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are saving your details.'));
+        $('#alert-wrapper').html(alert_markup('info', '<strong>Ett ögonblick</strong> Dina detaljer sparas.'));
 
-        if (MD5($('#invite_code').val()) !== 'b0e53b10c1f55ede516b240036b88f40'
+        if (MD5($('#invite_code').val()) !== 'e48e13207341b6bffb7fb1622282247b'
             && MD5($('#invite_code').val()) !== '2ac7f43695eb0479d5846bb38eec59cc') {
-            $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> Your invite code is incorrect.'));
+            $('#alert-wrapper').html(alert_markup('danger', '<strong>Ledsen</strong>, din kod var inkorrekt.'));
         } else {
-            $.post('https://script.google.com/macros/s/AKfycbzpY6T3wfDDayTD9PBeaQd89weAxnWmDBoelAeEInYA6cDB_Hk4n7PMPvDz3twjMn_b0g/exec', data)
+            $.post('https://script.google.com/macros/s/AKfycbzUk4WmlVyh0RbyVN1gqTrCwlHQLy63adhlwb-74ayufP2NuV8Oqw1nsCeUhb4VGNsT0A/exec', data)
                 .done(function (data) {
-                    console.log(data);
                     if (data.result === "error") {
                         $('#alert-wrapper').html(alert_markup('danger', data.message));
                     } else {
@@ -230,7 +228,6 @@ $(document).ready(function () {
                     }
                 })
                 .fail(function (data) {
-                    console.log(data);
                     $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. '));
                 });
         }
