@@ -218,7 +218,7 @@ $(document).ready(function () {
             && MD5($('#invite_code').val()) !== '2ac7f43695eb0479d5846bb38eec59cc') {
             $('#alert-wrapper').html(alert_markup('danger', '<strong>Ledsen</strong>, din kod var inkorrekt.'));
         } else {
-            $.post('https://script.google.com/macros/s/AKfycbyc1Go70ZPZMp3yMMKgH6Txks_iDJB-XuxXUxjCkAQFHH4XI2suQ7v9fEEFQR5rKJUOsA/exec', data)
+            $.post('https://script.google.com/macros/s/AKfycbyNcp0dLb24lhIgJTeLzAKJj3UyHw-UgCVM6nJ00vtldlCgxg5fR4A3eVyDEr-eEHfKPw/exec', data)
                 .done(function (data) {
                     if (data.result === "error") {
                         $('#alert-wrapper').html(alert_markup('danger', data.message));
