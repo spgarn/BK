@@ -194,7 +194,7 @@ $(document).ready(function () {
 
             // You can also choose to set an end time
             // If an end time is set, this will take precedence over duration
-            end: new Date('April 23, 2022 03:00'),
+            end: new Date('April 24, 2022 03:00'),
 
             // Event Address
             address: 'Grand hotell, Mölle',
